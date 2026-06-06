@@ -38,7 +38,11 @@ class Database {
             ];
             
             if ($dbType === 'mysql') {
-                $options[PDO::MYSQL_ATTR_INIT_COMMAND] = "SET NAMES utf8mb4";
+                if (PHP_VERSION_ID >= 80500 && class_exists('Pdo\Mysql')) {
+                    $options[Pdo\Mysql::ATTR_INIT_COMMAND] = "SET NAMES utf8mb4";
+                } else {
+                    $options[PDO::MYSQL_ATTR_INIT_COMMAND] = "SET NAMES utf8mb4";
+                }
             }
             
             $this->connection = new PDO($dsn, $username, $password, $options);

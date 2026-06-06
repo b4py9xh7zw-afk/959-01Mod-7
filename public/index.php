@@ -31,6 +31,7 @@ $routes = [
     'dashboard' => ['controller' => 'DashboardController', 'action' => 'index'],
     'dashboard/licenses' => ['controller' => 'DashboardController', 'action' => 'licenses'],
     'dashboard/users' => ['controller' => 'DashboardController', 'action' => 'users'],
+    'dashboard/sales' => ['controller' => 'LicenseController', 'action' => 'sales'],
     'auth/login' => ['controller' => 'AuthController', 'action' => 'login'],
     'auth/register' => ['controller' => 'AuthController', 'action' => 'register'],
     'auth/logout' => ['controller' => 'AuthController', 'action' => 'logout'],
@@ -38,6 +39,12 @@ $routes = [
     'licenses/view' => ['controller' => 'LicenseController', 'action' => 'view'],
     'licenses/update' => ['controller' => 'LicenseController', 'action' => 'update'],
     'licenses/delete' => ['controller' => 'LicenseController', 'action' => 'delete'],
+    'licenses/convert' => ['controller' => 'LicenseController', 'action' => 'convert'],
+    'licenses/handle-expiry' => ['controller' => 'LicenseController', 'action' => 'handleExpiry'],
+    'licenses/export' => ['controller' => 'LicenseController', 'action' => 'export'],
+    'licenses/add-project' => ['controller' => 'LicenseController', 'action' => 'addProject'],
+    'licenses/add-plugin' => ['controller' => 'LicenseController', 'action' => 'addPlugin'],
+    'licenses/add-seat' => ['controller' => 'LicenseController', 'action' => 'addSeat'],
 ];
 
 // Default route

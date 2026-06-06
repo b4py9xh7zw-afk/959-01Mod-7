@@ -43,6 +43,68 @@ require_once __DIR__ . '/../layouts/header.php';
             <?php endif; ?>
             
             <div>
+                <label for="type" class="block text-sm font-medium text-gray-700 mb-2">许可证类型</label>
+                <select 
+                    id="type" 
+                    name="type"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                >
+                    <option value="trial">试用版</option>
+                    <option value="paid">正式版</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="tier" class="block text-sm font-medium text-gray-700 mb-2">版本层级</label>
+                <select 
+                    id="tier" 
+                    name="tier"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                >
+                    <option value="basic">基础版</option>
+                    <option value="standard">标准版</option>
+                    <option value="premium">高级版</option>
+                </select>
+            </div>
+            
+            <div id="trial_days_div">
+                <label for="trial_days" class="block text-sm font-medium text-gray-700 mb-2">试用天数</label>
+                <input 
+                    type="number" 
+                    id="trial_days" 
+                    name="trial_days"
+                    value="14"
+                    min="1"
+                    max="90"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                >
+            </div>
+            
+            <div>
+                <label for="max_seats" class="block text-sm font-medium text-gray-700 mb-2">最大用户席位</label>
+                <input 
+                    type="number" 
+                    id="max_seats" 
+                    name="max_seats"
+                    value="3"
+                    min="1"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                >
+            </div>
+            
+            <div>
+                <label for="max_projects" class="block text-sm font-medium text-gray-700 mb-2">最大项目数</label>
+                <input 
+                    type="number" 
+                    id="max_projects" 
+                    name="max_projects"
+                    value="2"
+                    min="1"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                >
+            </div>
+            
+            <div>
                 <label for="status" class="block text-sm font-medium text-gray-700 mb-2">状态</label>
                 <select 
                     id="status" 
