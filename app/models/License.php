@@ -96,7 +96,6 @@ class License {
         $this->projectModel->transfer($trialLicenseId, $newLicenseId);
         $this->pluginModel->transfer($trialLicenseId, $newLicenseId);
         $this->userSeatModel->transfer($trialLicenseId, $newLicenseId);
-        $this->activityLogModel->transfer($trialLicenseId, $newLicenseId);
         $this->licenseFeatureModel->transfer($trialLicenseId, $newLicenseId);
         
         $this->licenseFeatureModel->enableAllFeatures($newLicenseId);
@@ -205,10 +204,17 @@ class License {
             return null;
         }
         
+        $isConverted = $license['status'] === 'converted' && !empty($license['converted_to_license_id']);
+        
+        $dataLicenseId = $licenseId;
+        if ($isConverted) {
+            $dataLicenseId = $license['converted_to_license_id'];
+        }
+        
         $readiness = $this->activityLogModel->getConversionReadiness($licenseId);
-        $projectCount = $this->projectModel->countByLicenseId($licenseId);
-        $pluginCount = $this->pluginModel->countByLicenseId($licenseId);
-        $seatCount = $this->userSeatModel->countByLicenseId($licenseId);
+        $projectCount = $this->projectModel->countByLicenseId($dataLicenseId);
+        $pluginCount = $this->pluginModel->countByLicenseId($dataLicenseId);
+        $seatCount = $this->userSeatModel->countByLicenseId($dataLicenseId);
         $activityCount = $this->activityLogModel->countByLicenseId($licenseId);
         $dailyActivity = $this->activityLogModel->getDailyActiveUsers($licenseId, 30);
         
@@ -227,7 +233,9 @@ class License {
             'daily_activity' => $dailyActivity,
             'trial_days_left' => $trialDaysLeft,
             'can_convert' => $license['type'] === 'trial' && $license['status'] === 'active',
-            'is_expired_trial' => $license['type'] === 'trial' && $license['trial_ends_at'] && strtotime($license['trial_ends_at']) < time()
+            'is_expired_trial' => $license['type'] === 'trial' && $license['trial_ends_at'] && strtotime($license['trial_ends_at']) < time(),
+            'is_converted' => $isConverted,
+            'converted_to_license_id' => $license['converted_to_license_id'] ?? null
         ];
     }
     

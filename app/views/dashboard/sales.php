@@ -223,6 +223,17 @@ $statusClasses = [
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <?php if ($stats): ?>
                                         <div class="text-sm text-gray-600">
+                                            <?php if (!empty($stats['is_converted'])): ?>
+                                                <div class="mb-1">
+                                                    <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                                                        ✅ 已转换
+                                                    </span>
+                                                    <a href="/licenses/view?id=<?php echo $stats['converted_to_license_id']; ?>" 
+                                                        class="text-xs text-blue-600 hover:underline ml-1">
+                                                        查看正式版 →
+                                                    </a>
+                                                </div>
+                                            <?php endif; ?>
                                             <p>📁 <?php echo $stats['project_count']; ?> 项目</p>
                                             <p>🔌 <?php echo $stats['plugin_count']; ?> 插件</p>
                                             <p>👤 <?php echo $stats['seat_count']; ?> 席位</p>

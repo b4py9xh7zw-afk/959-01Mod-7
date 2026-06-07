@@ -10,6 +10,7 @@ require_once __DIR__ . '/../models/Project.php';
 require_once __DIR__ . '/../models/Plugin.php';
 require_once __DIR__ . '/../models/UserSeat.php';
 require_once __DIR__ . '/../models/ActivityLog.php';
+require_once __DIR__ . '/../models/LicenseFeature.php';
 
 class LicenseController {
     private $authController;
@@ -19,6 +20,7 @@ class LicenseController {
     private $pluginModel;
     private $userSeatModel;
     private $activityLogModel;
+    private $licenseFeatureModel;
     
     public function __construct() {
         $this->authController = new AuthController();
@@ -28,6 +30,7 @@ class LicenseController {
         $this->pluginModel = new Plugin();
         $this->userSeatModel = new UserSeat();
         $this->activityLogModel = new ActivityLog();
+        $this->licenseFeatureModel = new LicenseFeature();
     }
     
     public function create() {
@@ -127,7 +130,7 @@ class LicenseController {
         $seats = $this->userSeatModel->findByLicenseId($id);
         $activityLogs = $this->activityLogModel->findByLicenseId($id, 20, 0);
         
-        $features = $this->licenseModel->licenseFeatureModel->findByLicenseId($id);
+        $features = $this->licenseFeatureModel->findByLicenseId($id);
         
         require_once __DIR__ . '/../views/licenses/view.php';
     }
